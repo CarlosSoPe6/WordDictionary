@@ -11,10 +11,10 @@
 typedef struct srtDictionaryHead * Dictionary;
 
 Dictionary dict_create();
-void dict_destroy();
 unsigned int dict_size(Dictionary);
 void dict_set(Dictionary, Text, Text);
 Text dict_get(Dictionary, Text);
 Text * dict_keys(Dictionary);
+void dict_destroy();
 
 #endif
