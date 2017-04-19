@@ -78,9 +78,11 @@ void dict_set(Dictionary d, Text word, text def){
         switch(cursor_value){
             case 'A':
                 if(n->a == NULL){
-                    // We set the word
+                    n->a->data->word = compare_word;
+                    n->a->data->def = def;
                     flag = false;
                 }
+                n = n->a;
                 break;
             case 'B':break;
             case 'C':break;
