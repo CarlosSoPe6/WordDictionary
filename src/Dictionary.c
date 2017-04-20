@@ -312,3 +312,109 @@ void dict_set(Dictionary d, Text word, Text def){
         cursor_pos++;
     }
 }
+
+Text dict_get(Dictionary dict, Text word){
+    int cursor_pos = 0;
+    char cursor_value = 0;
+    Node n = d->initial
+    Text compare_word = text_ansi(word);
+    compare_word = text_upperCase(word);
+
+    while(text_compare(n->data->key, compare_word)){
+        cursor_value = text_charAt(word, cursor_pos);
+        switch(cursor_value){
+            case 'A':
+                n = n->a;
+                break;
+            case 'B':
+                n = n->b;
+                break;
+            case 'C':
+                n = n->c;
+                break;
+            case 'C':
+                n = n->c;
+                break;
+            case 'D':
+                n = n->d;
+                break;
+            case 'E':
+                n = n->e;
+                break;
+            case 'F':
+                n = n->f;
+                break;
+            case 'G':
+                n = n->f;
+                break;
+            case 'H':
+                n = n->h;
+                break;
+            case 'I':
+                n = n->i;
+                break;
+            case 'J':
+                n = n->j;
+                break;
+            case 'K':
+                n = n->k;
+                break;
+            case 'L':
+                n = n->l;
+                break;
+            case 'M':
+                n = n->m;
+                break;
+            case 'N':
+                n = n->n;
+                break;
+            case 'O':
+                n = n->o;
+                break;
+            case 'P':
+                n = n->p;
+                break;
+            case 'R':
+                n = n->r;
+                break;
+            case 'S':
+                n = n->s;
+                break;
+            case 'T':
+                n = n->t;
+                break;
+            case 'U':
+                n = n->u;
+                break;
+            case 'V':
+                n = n->v;
+                break;
+            case 'W':
+                n = n->w;
+                break;
+            case 'X':
+                n = n->x;
+                break;
+            case 'Y':
+                n = n->y;
+                break;
+            case 'Z':
+                n = n->z;
+                break;
+            case '_':
+                n = n->underscore;
+                break;
+            // TODO: Reemplazar Ñ con el código ascii
+            case 'ñ': 
+                n = n->nacute;
+                break;
+        }
+        if(n == NULL){
+            // Manejar la palabra inexistente
+            return "Deninición no existe";
+        }
+        // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
+        cursor_pos++;
+    }
+    return n->data->def;
+}
