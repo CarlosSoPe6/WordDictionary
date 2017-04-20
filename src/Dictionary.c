@@ -7,6 +7,7 @@
 
 #include "Dictionary.h"
 #include "Text.h"
+#include "Stack.h"
 
 typedef struct strNode* Node;
 typedef struct strData Data;
