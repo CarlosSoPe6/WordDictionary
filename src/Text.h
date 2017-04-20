@@ -1,10 +1,35 @@
-/**
+/*
  * Text.h
- * TDA text
+ *
+ *  Created on: 15/03/2017
+ *      Author: hpiza
  */
-#ifndef _H_TEXT_
-#define _H_TEXT_
 
+#ifndef TEXT_H_
+#define TEXT_H_
 
+typedef struct strText* Text;
 
-#endif
+Text text_create(char *);
+
+void text_destroy(Text);
+
+void text_println(Text);
+
+unsigned int text_length(Text);
+
+Text text_toLowerCase(Text);
+
+int text_indexOf(Text, char);
+
+Text text_concat(Text, const Text);
+
+void text_append(Text, char*);
+
+Text text_replace(Text, char oldChar, char newChar);
+
+Text text_ansi(Text);
+
+Text text_charAt(Text, int);
+
+#endif /* TEXT_H_ */
