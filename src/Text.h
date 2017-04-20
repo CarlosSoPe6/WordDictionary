@@ -8,6 +8,7 @@
 #ifndef TEXT_H_
 #define TEXT_H_
 
+typedef enum { false, true } bool;
 typedef struct strText* Text;
 
 Text text_create(char *);
@@ -31,5 +32,7 @@ Text text_replace(Text, char oldChar, char newChar);
 Text text_ansi(Text);
 
 Text text_charAt(Text, int);
+
+bool text_compare(Text, Text)
 
 #endif /* TEXT_H_ */

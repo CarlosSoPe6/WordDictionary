@@ -171,3 +171,7 @@ Text text_charAt(Text t, int p)
 {
 	return t->chars[p];
 }
+
+bool text_compare(Text t1, Text t2){
+    return strcmp(t1, t2);
+}
