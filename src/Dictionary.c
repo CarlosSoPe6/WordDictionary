@@ -320,7 +320,13 @@ Text dict_get(Dictionary dict, Text word){
     Text compare_word = text_ansi(word);
     compare_word = text_upperCase(word);
 
+
+
     while(text_compare(n->data->key, compare_word)){
+        if(n == NULL){
+            // Manejar la palabra inexistente
+            return "Deninición no existe";
+        }
         cursor_value = text_charAt(word, cursor_pos);
         switch(cursor_value){
             case 'A':
@@ -408,10 +414,6 @@ Text dict_get(Dictionary dict, Text word){
             case 'ñ': 
                 n = n->nacute;
                 break;
-        }
-        if(n == NULL){
-            // Manejar la palabra inexistente
-            return "Deninición no existe";
         }
         // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
         cursor_pos++;
