@@ -1,9 +1,9 @@
 /*
- * Text.h
- *
- *  Created on: 15/03/2017
- *      Author: hpiza
- */
+* Text.h
+*
+*  Created on: 15/03/2017
+*      Author: hpiza
+*/
 
 #include "Bool.h"
 
@@ -12,7 +12,7 @@
 
 typedef struct strText* Text;
 
-Text text_create(char *);
+Text text_create(const char *);
 
 Text text_clone(Text);
 
@@ -38,6 +38,6 @@ Text text_ansi(Text);
 
 char text_charAt(Text, int);
 
-bool text_compare(Text, Text);
+Bool text_compare(Text, Text);
 
 #endif /* TEXT_H_ */

@@ -6,4 +6,4 @@ gcc -O3 -Wall -c -o Stack.o Stack.c
 ar -r libStack.a Text.o
 
 gcc -O3 -Wall -c -o Dictionary.o Dictionary.c
-ar -r Dictionary.a Dictionary.o
+ar -r libDictionary.a Dictionary.o
