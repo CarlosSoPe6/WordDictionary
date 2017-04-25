@@ -14,6 +14,8 @@ typedef struct strText* Text;
 
 Text text_create(unsigned char *);
 
+Text text_clone(Text);
+
 void text_destroy(Text);
 
 void text_println(Text);
@@ -21,6 +23,8 @@ void text_println(Text);
 unsigned int text_length(Text);
 
 Text text_toLowerCase(Text);
+
+Text text_toUpperCase(Text);
 
 int text_indexOf(Text, char);
 
@@ -30,7 +34,7 @@ void text_append(Text, char*);
 
 Text text_replace(Text, char oldChar, char newChar);
 
-void text_ansi(Text);
+Text text_ansi(Text);
 
 char text_charAt(Text, int);
 

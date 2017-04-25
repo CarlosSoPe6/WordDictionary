@@ -28,6 +28,11 @@ Text text_create(unsigned char *chars) {
 	return text;
 }
 
+Text text_clone(Text orig){
+	Text the_clone = text_create(orig->chars);
+	return the_clone;
+}
+
 void text_println(Text text) {
 	puts((char *)(text->chars));
 }
@@ -129,7 +134,7 @@ Text text_replace(Text text, char oldChar, char newChar )
 	return text;
 }
 
-void text_ansi(Text t)
+Text text_ansi(Text t)
 {
 	unsigned int len = t->length;
 	int i;
@@ -169,6 +174,7 @@ void text_ansi(Text t)
 			}
 		}
 	}
+	return t;
 }
 
 char text_charAt(Text t, int p)

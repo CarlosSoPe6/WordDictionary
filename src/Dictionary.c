@@ -44,45 +44,40 @@ struct strNode{
     Text key;
     Text word;
     Text def;
-}
+};
 
 struct srtDictionaryHead{
-    Node initial
+    Node initial;
     unsigned int deep;
-}
+};
 
 Dictionary dict_create(){
-    Node n = calloc(1, sizeof(struct strNode));
-    Dictionary dict = (Dictionary)malloc(sizeof(struct srtDictionaryHead));
-    dict->deep = 0;
-    dict->initial = n;
-    return n;
+    Dictionary dict = (Dictionary)calloc(1, sizeof(struct srtDictionaryHead));
+    return dict;
 }
 
 unsigned int dict_size(Dictionary d){
     return d->deep;
 }
 
-void set_node_data(node, Text word, Text key, Text def){
-    n->key = compare_word = text_create(key);
-    n->word = text_create(word);
-    n->def = text_create(def);
+void set_node_data(Node n, Text word, Text key, Text def){
+    n->key = text_clone(key);
+    n->word = text_clone(word);
+    n->def = text_clone(def);
 }
 
 void dict_set(Dictionary d, Text word, Text def){
-    int i;
     //Si se agragó el elemento, la bandera será falso
     bool flag = true;
     int cursor_pos = 0;
-    char cursor_value = 0;
+    unsigned char cursor_value = 0;
     Node n = d->initial;
-    Data d = NULL;
     Text compare_word = text_ansi(word);
-    compare_word = text_upperCase(word);
+    compare_word = text_toUpperCase(word);
     //Si es el primer nodo
     if(n == NULL){
-        n = (Node) malloc(sizeof(strNode));
-        set_node_data(n, word, , def);
+        n = (Node) malloc(sizeof(struct strNode));
+        set_node_data(n, word, compare_word, def);
         flag = false;
     }
 
@@ -90,7 +85,7 @@ void dict_set(Dictionary d, Text word, Text def){
     while(flag){
         cursor_value = text_charAt(word, cursor_pos);
         switch(cursor_value){
-            case 'A'
+            case 'A':
                 n = n->a;
                 break;
             case 'B':
@@ -175,29 +170,32 @@ void dict_set(Dictionary d, Text word, Text def){
             break;        
         }
         if(n == NULL){
-            n = (Node) malloc(sizeof(strNode));
-            set_node_data(n, word, , def);
+            n = (Node) malloc(sizeof(struct strNode));
+            set_node_data(n, word, compare_word, def);
             flag = false;
         }
         cursor_pos++;
+    }
+    if(!flag){
+        d->deep++;
     }
 }
 
 Text dict_get(Dictionary dict, Text word){
     int cursor_pos = 0;
-    char cursor_value = 0;
-    Node n = d->initial
+    unsigned char cursor_value = 0;
+    Node n = dict->initial;
     Text compare_word = text_ansi(word);
-    compare_word = text_upperCase(word);
+    compare_word = text_toUpperCase(word);
     Text return_text = NULL;
-    bool flaf = true;
+    bool flag = true;
 
     if(n == NULL){
         // Manejar que el nodo inicial es null
         flag = false;
     }
 
-    while(text_compare(n->data->key, compare_word) && flag){
+    while(text_compare(n->key, compare_word) && flag){
         cursor_value = text_charAt(word, cursor_pos);
         switch(cursor_value){
             case 'A':
@@ -205,9 +203,6 @@ Text dict_get(Dictionary dict, Text word){
                 break;
             case 'B':
                 n = n->b;
-                break;
-            case 'C':
-                n = n->c;
                 break;
             case 'C':
                 n = n->c;
@@ -293,5 +288,6 @@ Text dict_get(Dictionary dict, Text word){
         }
         cursor_pos++;
     }
-    return n->data->def;
+    return_text = n->def; 
+    return return_text;
 }

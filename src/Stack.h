@@ -7,7 +7,6 @@
 #ifndef _H_STACK
 #define _H_STACK
 
-typedef enum { false, true } bool;
 typedef void* Type;
 typedef struct strStack* Stack;
 typedef unsigned int UInt;
