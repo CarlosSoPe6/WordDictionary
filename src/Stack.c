@@ -3,6 +3,7 @@
  */
 
 #include "Stack.h"
+#include "Bool.h"
 #include <stdlib.h>
 
 struct strNode {

@@ -2,6 +2,8 @@
  * Stack.h
  */
 
+#include "Bool.h"
+
 #ifndef _H_STACK
 #define _H_STACK
 
