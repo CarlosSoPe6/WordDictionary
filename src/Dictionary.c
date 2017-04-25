@@ -191,6 +191,7 @@ Text dict_get(Dictionary dict, Text word){
 
     if(n == NULL){
         // Manejar que el nodo inicial es null
+        flag = false;
     }
 
     while(text_compare(n->data->key, compare_word) && flag){
@@ -284,7 +285,7 @@ Text dict_get(Dictionary dict, Text word){
         }
         // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
         if(n == NULL){
-            // Manejar que el nodo inicial es null
+            // Manejar que no exixtieron coinidencias
             flag = false;
         }
         cursor_pos++;
