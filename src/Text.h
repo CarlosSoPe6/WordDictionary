@@ -12,7 +12,7 @@
 
 typedef struct strText* Text;
 
-Text text_create(unsigned char *);
+Text text_create(char *);
 
 Text text_clone(Text);
 

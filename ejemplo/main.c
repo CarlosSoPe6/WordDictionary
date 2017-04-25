@@ -9,7 +9,7 @@
 #include <Dictionary.h>
 
 int main(){
-    Text word = NULL
+    Text word = NULL;
     Text definition = NULL;
     Dictionary dictionary = NULL;    
 
@@ -40,4 +40,6 @@ int main(){
     dict_set(dictionary, word, definition);
     text_destroy(word);
     text_destroy(definition);
+
+    return 0;
 }

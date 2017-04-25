@@ -18,9 +18,9 @@ struct strText {
 	unsigned int length;
 };
 
-Text text_create(unsigned char *chars) {
+Text text_create(char *chars) {
 	Text text = (Text) malloc(sizeof(struct strText));
-	text->length = strlen((char *)chars);
+	text->length = strlen(chars);
 	text->chars = (unsigned char*) malloc((text->length + 1) * sizeof(char));
 	strcpy((char *)text->chars, (char *)chars);
 	text->chars[text->length] = '\0';
@@ -29,7 +29,7 @@ Text text_create(unsigned char *chars) {
 }
 
 Text text_clone(Text orig){
-	Text the_clone = text_create(orig->chars);
+	Text the_clone = text_create((char *)orig->chars);
 	return the_clone;
 }
 
@@ -62,7 +62,7 @@ Text text_toLowerCase(Text text)
 		if (text->chars[i] == (char)165)
 			text->chars[i]++;//La ñ se encuentra una posicion arriba que Ñ en ASCII
 	}
-	Text out = text_create(text->chars);
+	Text out = text_create((char *)text->chars);
 	return out;
 }
 
@@ -81,7 +81,7 @@ Text text_toUpperCase(Text text)
 		if (text->chars[i] == NACUTE_LOWER)
 			text->chars[i]--;
 	}
-	Text out = text_create(text->chars);
+	Text out = text_create((char *)text->chars);
 	return out;
 }
 
@@ -99,7 +99,7 @@ int text_indexOf(Text text, char letra)
 Text text_concat(Text destino, const Text entrada)
 {
 	int i;
-	Text final = text_create(destino->chars);
+	Text final = text_create((char *)destino->chars);
 	int final_len = final->length, entrada_len = entrada->length;
 	final->chars = (unsigned char*)realloc(final->chars, (final_len + entrada_len) * sizeof(char));
 	for (i = 0; i < entrada_len; ++i)
