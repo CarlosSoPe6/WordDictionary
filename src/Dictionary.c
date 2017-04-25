@@ -63,6 +63,12 @@ unsigned int dict_size(Dictionary d){
     return d->deep;
 }
 
+void set_node_data(node, Text word, Text key, Text def){
+    n->key = compare_word = text_create(key);
+    n->word = text_create(word);
+    n->def = text_create(def);
+}
+
 void dict_set(Dictionary d, Text word, Text def){
     int i;
     //Si se agragó el elemento, la bandera será falso
@@ -76,9 +82,8 @@ void dict_set(Dictionary d, Text word, Text def){
     //Si es el primer nodo
     if(n == NULL){
         n = (Node) malloc(sizeof(strNode));
-        n->key = compare_word;
-        n->word = word;
-        n->def = def;
+        set_node_data(n, word, , def);
+        flag = false;
     }
 
     // TODO: Aquí puede tronar si recorrimos toda la palabra y no encontramos coincidencia
@@ -171,9 +176,7 @@ void dict_set(Dictionary d, Text word, Text def){
         }
         if(n == NULL){
             n = (Node) malloc(sizeof(strNode));
-            n->key = compare_word;
-            n->word = word;
-            n->def = def;
+            set_node_data(n, word, , def);
             flag = false;
         }
         cursor_pos++;
