@@ -10,11 +10,9 @@
 #ifndef TEXT_H_
 #define TEXT_H_
 
-
-typedef enum { false, true } bool;
 typedef struct strText* Text;
 
-Text text_create(char *);
+Text text_create(unsigned char *);
 
 void text_destroy(Text);
 
@@ -32,10 +30,10 @@ void text_append(Text, char*);
 
 Text text_replace(Text, char oldChar, char newChar);
 
-Text text_ansi(Text);
+void text_ansi(Text);
 
-Text text_charAt(Text, int);
+char text_charAt(Text, int);
 
-bool text_compare(Text, Text)
+bool text_compare(Text, Text);
 
 #endif /* TEXT_H_ */

@@ -10,23 +10,26 @@
 #include <stdio.h>
 #include <string.h>
 
+#define NACUTE_UPPER 165
+#define NACUTE_LOWER 164
+
 struct strText {
-	char *chars;
+	unsigned char *chars;
 	unsigned int length;
 };
 
-Text text_create(char *chars) {
+Text text_create(unsigned char *chars) {
 	Text text = (Text) malloc(sizeof(struct strText));
-	text->length = strlen(chars);
-	text->chars = (char*) malloc((text->length + 1) * sizeof(char));
-	strcpy(text->chars, chars);
+	text->length = strlen((char *)chars);
+	text->chars = (unsigned char*) malloc((text->length + 1) * sizeof(char));
+	strcpy((char *)text->chars, (char *)chars);
 	text->chars[text->length] = '\0';
 
 	return text;
 }
 
 void text_println(Text text) {
-	puts(text->chars);
+	puts((char *)(text->chars));
 }
 
 unsigned int text_length(Text text) {
@@ -70,7 +73,7 @@ Text text_toUpperCase(Text text)
 			text->chars[i] -= 32;
 		}
 		//Si es Ñ (165 en ASCII)
-		if (text->chars[i] == 'ñ')
+		if (text->chars[i] == NACUTE_LOWER)
 			text->chars[i]--;
 	}
 	Text out = text_create(text->chars);
@@ -93,7 +96,7 @@ Text text_concat(Text destino, const Text entrada)
 	int i;
 	Text final = text_create(destino->chars);
 	int final_len = final->length, entrada_len = entrada->length;
-	final->chars = (char*)realloc(final->chars, (final_len + entrada_len) * sizeof(char));
+	final->chars = (unsigned char*)realloc(final->chars, (final_len + entrada_len) * sizeof(char));
 	for (i = 0; i < entrada_len; ++i)
 	{
 		final->chars[i + final_len] = entrada->chars[i];
@@ -108,7 +111,7 @@ void text_append(Text text, char* palabra)
 {
 	int i;
 	int text_len = text->length, palabra_len = strlen(palabra);
-	text->chars = (char*)realloc(text->chars, sizeof(char) * (text_len + palabra_len));
+	text->chars = (unsigned char*)realloc(text->chars, sizeof(char) * (text_len + palabra_len));
 	for (i = 0; i < palabra_len; ++i)
 	{
 		text->chars[i + text_len] = palabra[i];
@@ -126,22 +129,22 @@ Text text_replace(Text text, char oldChar, char newChar )
 	return text;
 }
 
-Text text_ansi(Text t)
+void text_ansi(Text t)
 {
 	unsigned int len = t->length;
 	int i;
 	for (i = 0; i < len; i++) {
 		//Si la letra es á, í, ó, ú
-		if (t->chars[i] >= 160 && t->chars[i] <== 163) {
+		if (t->chars[i] >= 160 && t->chars[i] <= 163) {
 			//Se le van a restar 63, que es la diferencia en ASCII con sus respectivas sin acento
 			//Ejemplo: á = 160, a = 97
 			t->chars[i] -= 63;
 		}
 		//Si la no está de la 'A' a la 'Z' ni de la 'a' a la 'z', incluyendo las ñ's
-		else if ((t->chars[i] <= 'A' && t->chars[i] >= 'Z') || (t->chars[i] <= 'a' && t->chars[i] >= 'z') || (t->chars[i] != 'Ñ' && t->chars[i] != 'ñ'))
+		else if ((t->chars[i] <= 'A' && t->chars[i] >= 'Z') || (t->chars[i] <= 'a' && t->chars[i] >= 'z') || (t->chars[i] != NACUTE_UPPER && t->chars[i] != NACUTE_LOWER))
 		{
 			//Para todas las demas vocales con acento dispersas en ASCII
-			switch (len->chars[i])
+			switch (t->chars[i])
 			{
 				case 130:
 					t->chars[i] = 'e';
@@ -168,11 +171,11 @@ Text text_ansi(Text t)
 	}
 }
 
-Text text_charAt(Text t, int p)
+char text_charAt(Text t, int p)
 {
 	return t->chars[p];
 }
 
 bool text_compare(Text t1, Text t2){
-    return strcmp(t1, t2);
+    return strcmp((const char*)t1->chars, (const char*)t2->chars);
 }
