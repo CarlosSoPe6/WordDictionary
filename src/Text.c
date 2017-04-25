@@ -185,3 +185,8 @@ char text_charAt(Text t, int p)
 bool text_compare(Text t1, Text t2){
     return strcmp((const char*)t1->chars, (const char*)t2->chars);
 }
+
+char* text_getChars(Text t)
+{
+	return t->chars;
+}

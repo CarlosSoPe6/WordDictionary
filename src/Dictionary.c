@@ -50,6 +50,7 @@ struct srtDictionaryHead{
     Node initial;
     unsigned int deep;
 };
+typedef enum { A, B, C, D, E, F, G, H, I, J, K, L, M ,N, O, P, Q, R, S, T, U, V, W, X, Y, Z, NACUTE, UNDERSCORE} Letter;
 
 Dictionary dict_create(){
     Dictionary dict = (Dictionary)calloc(1, sizeof(struct srtDictionaryHead));
@@ -167,7 +168,7 @@ void dict_set(Dictionary d, Text word, Text def){
                 break;
             case '_':
                 n = n->underscore;
-            break;        
+            break;
         }
         if(n == NULL){
             n = (Node) malloc(sizeof(struct strNode));
@@ -277,17 +278,262 @@ Text dict_get(Dictionary dict, Text word){
                 n = n->underscore;
                 break;
             // TODO: Reemplazar Ñ con el código ascii
-            case 165: 
+            case 165:
                 n = n->nacute;
                 break;
         }
-        // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
+        // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo
         if(n == NULL){
             // Manejar que no exixtieron coinidencias
             flag = false;
         }
         cursor_pos++;
     }
-    return_text = n->def; 
+    return_text = n->def;
     return return_text;
+}
+
+char** dict_keys (Dictionary d)
+{
+    //Aquí se van a almacenar los apuntadores a las palabras
+    char **alm = (char**)malloc(sizeof(char*) * d->deep);
+    Node n = (Node)calloc(1, sizeof(struct strNode));
+    n = d->initial;
+    Stack s = stack_create();
+    //Este arreglo va a contar la letra que vamos por nivel
+    Letter *counter = (Letter*)malloc(sizeof(Letter));
+    //Contador para el arreglo
+    int i = 0;
+    //Este va a llevar la cuenta del nivel que va
+    unsigned int level = 1;
+    //Bandera que dice si hubo un cambio en el nivel
+    bool changed;
+    while(i < d->deep)
+    {
+        changed = false;
+        counter[level] = A;
+        switch (counter[level])
+        {
+            case A:
+                if (n->a != NULL) {
+                    n = n->a;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case B:
+                if (n->b != NULL) {
+                    n = n->b;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case C:
+                if (n->c != NULL) {
+                    n = n->c;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case D:
+                if (n->d != NULL) {
+                    n = n->d;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case E:
+                if (n->e != NULL) {
+                    n = n->e;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case F:
+                if (n->f != NULL) {
+                    n = n->f;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case G:
+                if (n->g != NULL) {
+                    n = n->g;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case H:
+                if (n->h != NULL) {
+                    n = n->h;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case I:
+                if (n->i != NULL) {
+                    n = n->i;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case J:
+                if (n->j != NULL) {
+                    n = n->j;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case K:
+                if (n->k != NULL) {
+                    n = n->k;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case L:
+                if (n->l != NULL) {
+                    n = n->l;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case M:
+                if (n->m != NULL) {
+                    n = n->m;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case N:
+                if (n->n != NULL) {
+                    n = n->n;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case O:
+                if (n->o != NULL) {
+                    n = n->o;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case P:
+                if (n->p != NULL) {
+                    n = n->p;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case Q:
+                if (n->q != NULL) {
+                    n = n->q;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case R:
+                if (n->r != NULL) {
+                    n = n->r;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case S:
+                if (n->s != NULL) {
+                    n = n->s;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case T:
+                if (n->t != NULL) {
+                    n = n->t;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case U:
+                if (n->u != NULL) {
+                    n = n->u;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case V:
+                if (n->v != NULL) {
+                    n = n->v;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case W:
+                if (n->w != NULL) {
+                    n = n->w;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case X:
+                if (n->x != NULL) {
+                    n = n->x;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case Y:
+                if (n->y != NULL) {
+                    n = n->y;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case Z:
+                if (n->z != NULL) {
+                    n = n->z;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case NACUTE:
+                if (n->nacute != NULL) {
+                    n = n->nacute;
+                    changed = true;
+                    break;
+                }
+                counter[level]++;
+            case UNDERSCORE:
+                if (n->underscore != NULL) {
+                    n = n->underscore;
+                    changed = true;
+                    break;
+                }
+            }
+        //Si hubo un cambio
+        if (changed)
+        {
+            //El nivel aumenta
+            level ++;
+            //Se hace el push en el stack
+            stack_push(s, n);
+            //Se agrega al arreglo
+            alm[i] = text_getChars(n->word);
+            //El contador del arreglo aumenta
+            i++;
+        }
+        else
+        {
+            if (!stack_isEmpty(s)) {
+                stack_pop(s);
+                n = stack_top(s);
+                level --;
+            }
+        }
+        counter = (Letter*)realloc(counter, level * sizeof(Letter));
+    }
+    stack_destroy(s);
+    free(n);
+    free(counter);
+    return alm;
 }
