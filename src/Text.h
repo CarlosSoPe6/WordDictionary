@@ -5,8 +5,11 @@
  *      Author: hpiza
  */
 
+#include "Bool.h"
+
 #ifndef TEXT_H_
 #define TEXT_H_
+
 
 typedef enum { false, true } bool;
 typedef struct strText* Text;

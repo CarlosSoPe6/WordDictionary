@@ -3,6 +3,7 @@
  * TDA dictionary
  */
 
+#include "Bool.h"
 #include "Text.h"
 
 #ifndef _H_DICT_
