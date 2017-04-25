@@ -20,7 +20,7 @@ struct strText {
 
 Text text_create(char *chars) {
 	Text text = (Text) malloc(sizeof(struct strText));
-	text->length = strlen(chars);
+	text->length = strlen((char *)chars);
 	text->chars = (unsigned char*) malloc((text->length + 1) * sizeof(char));
 	strcpy((char *)text->chars, (char *)chars);
 	text->chars[text->length] = '\0';
