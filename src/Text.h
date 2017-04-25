@@ -40,4 +40,6 @@ char text_charAt(Text, int);
 
 Bool text_compare(Text, Text);
 
+char* text_getChars(Text);
+
 #endif /* TEXT_H_ */
