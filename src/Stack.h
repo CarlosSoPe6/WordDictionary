@@ -15,7 +15,7 @@ Stack stack_create();
 void  stack_push(Stack, Type);
 Type  stack_pop(Stack);
 Type  stack_top(Stack);
-bool  stack_isEmpty(Stack);
+Bool  stack_isEmpty(Stack);
 UInt  stack_size(Stack);
 void  stack_destroy(Stack);
 

@@ -207,7 +207,7 @@ void dict_set(Dictionary d, Text word, Text def) {
 			}
 			n = n->n;
 			break;
-		case (char)NACUTE_UPPER:
+		case (unsigned char)NACUTE_UPPER:
 			if (n->nacute == NULL) {
 				n->nacute = (Node)calloc(1, sizeof(struct strNode));
 				set_node_data(n->nacute, word, compare_word, def);
@@ -427,7 +427,7 @@ Text dict_get(Dictionary dict, Text word) {
 			n = n->underscore;
 			break;
 			// TODO: Reemplazar Ñ con el código ascii
-		case (char)NACUTE_UPPER:
+		case (unsigned char)NACUTE_UPPER:
 			n = n->nacute;
 			break;
 		}
@@ -476,12 +476,12 @@ char** dict_keys (Dictionary d)
         changed = false;
         switch (counter[level])
         {
-            /*
+
             Se va a evaluar el contrador counter en el nivel del arbol que esté.
             Dependiendo de la letra en la que vaya, preguntara si es nulo; si sí es nulo,
             el auxiliar cambiara y se bajará un nivel, de lo contrario continuará con la
             siguiente letra
-            /*
+
             case A:
                 if (n->a != NULL) {
                     n = n->a;
@@ -715,34 +715,34 @@ void capBrench(Node n, char ***array, int *i)
 {
 	(*array)[*i] = text_getChars(n->word);
 	(*i)++;
-	if(n->a != NULL) capBrench(n->a, array, i)
-	if(n->b != NULL) capBrench(n->b, array, i)
-	if(n->c != NULL) capBrench(n->c, array, i)
-	if(n->d != NULL) capBrench(n->d, array, i)
-	if(n->e != NULL) capBrench(n->e, array, i)
-	if(n->f != NULL) capBrench(n->f, array, i)
-	if(n->g != NULL) capBrench(n->g, array, i)
-	if(n->h != NULL) capBrench(n->h, array, i)
-	if(n->i != NULL) capBrench(n->i, array, i)
-	if(n->j != NULL) capBrench(n->j, array, i)
-	if(n->k != NULL) capBrench(n->k, array, i)
-	if(n->l != NULL) capBrench(n->l, array, i)
-	if(n->m != NULL) capBrench(n->m, array, i)
-	if(n->n != NULL) capBrench(n->n, array, i)
-	if(n->nacute != NULL) capBrench(n->nacute, array, i)
-	if(n->o != NULL) capBrench(n->o, array, i)
-	if(n->p != NULL) capBrench(n->p, array, i)
-	if(n->q != NULL) capBrench(n->q, array, i)
-	if(n->r != NULL) capBrench(n->r, array, i)
-	if(n->s != NULL) capBrench(n->s, array, i)
-	if(n->t != NULL) capBrench(n->t, array, i)
-	if(n->u != NULL) capBrench(n->u, array, i)
-	if(n->v != NULL) capBrench(n->v, array, i)
-	if(n->w != NULL) capBrench(n->w, array, i)
-	if(n->x != NULL) capBrench(n->x, array, i)
-	if(n->y != NULL) capBrench(n->y, array, i)
-	if(n->z != NULL) capBrench(n->z, array, i)
-	if(n->underscore != NULL) capBrench(n->underscore, array, i)
+	if(n->a != NULL) capBrench(n->a, array, i);
+	if(n->b != NULL) capBrench(n->b, array, i);
+	if(n->c != NULL) capBrench(n->c, array, i);
+	if(n->d != NULL) capBrench(n->d, array, i);
+	if(n->e != NULL) capBrench(n->e, array, i);
+	if(n->f != NULL) capBrench(n->f, array, i);
+	if(n->g != NULL) capBrench(n->g, array, i);
+	if(n->h != NULL) capBrench(n->h, array, i);
+	if(n->i != NULL) capBrench(n->i, array, i);
+	if(n->j != NULL) capBrench(n->j, array, i);
+	if(n->k != NULL) capBrench(n->k, array, i);
+	if(n->l != NULL) capBrench(n->l, array, i);
+	if(n->m != NULL) capBrench(n->m, array, i);
+	if(n->n != NULL) capBrench(n->n, array, i);
+	if(n->nacute != NULL) capBrench(n->nacute, array, i);
+	if(n->o != NULL) capBrench(n->o, array, i);
+	if(n->p != NULL) capBrench(n->p, array, i);
+	if(n->q != NULL) capBrench(n->q, array, i);
+	if(n->r != NULL) capBrench(n->r, array, i);
+	if(n->s != NULL) capBrench(n->s, array, i);
+	if(n->t != NULL) capBrench(n->t, array, i);
+	if(n->u != NULL) capBrench(n->u, array, i);
+	if(n->v != NULL) capBrench(n->v, array, i);
+	if(n->w != NULL) capBrench(n->w, array, i);
+	if(n->x != NULL) capBrench(n->x, array, i);
+	if(n->y != NULL) capBrench(n->y, array, i);
+	if(n->z != NULL) capBrench(n->z, array, i);
+	if(n->underscore != NULL) capBrench(n->underscore, array, i);
 }
 
 char** dict_keys (Dictionary d)
@@ -750,5 +750,5 @@ char** dict_keys (Dictionary d)
 	int i = 0;
 	char **array = (char**)malloc(sizeof(char) * d->deep);
 	capBrench(d->initial, &array, &i);
-	retrurn array;
+	return array;
 }
