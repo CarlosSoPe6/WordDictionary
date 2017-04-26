@@ -1,7 +1,7 @@
 /**
- * Dictionary.c
- * TDA dictionary
- */
+* Dictionary.c
+* TDA dictionary
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,287 +10,442 @@
 #include "Text.h"
 #include "Stack.h"
 
+#define NACUTE_UPPER 165
+
 typedef struct strNode* Node;
 
-struct strNode{
-    Node a;
-    Node b;
-    Node c;
-    Node d;
-    Node e;
-    Node f;
-    Node g;
-    Node h;
-    Node i;
-    Node j;
-    Node k;
-    Node l;
-    Node m;
-    Node n;
-    Node nacute;
-    Node o;
-    Node p;
-    Node q;
-    Node r;
-    Node s;
-    Node t;
-    Node u;
-    Node v;
-    Node w;
-    Node x;
-    Node y;
-    Node z;
-    Node underscore;
-    Text key;
-    Text word;
-    Text def;
+typedef enum { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, NACUTE, UNDERSCORE } Letter;
+
+
+struct strNode {
+	Node a;
+	Node b;
+	Node c;
+	Node d;
+	Node e;
+	Node f;
+	Node g;
+	Node h;
+	Node i;
+	Node j;
+	Node k;
+	Node l;
+	Node m;
+	Node n;
+	Node nacute;
+	Node o;
+	Node p;
+	Node q;
+	Node r;
+	Node s;
+	Node t;
+	Node u;
+	Node v;
+	Node w;
+	Node x;
+	Node y;
+	Node z;
+	Node underscore;
+	Text key;
+	Text word;
+	Text def;
 };
 
-struct srtDictionaryHead{
-    Node initial;
-    unsigned int deep;
+struct srtDictionaryHead {
+	Node initial;
+	unsigned int deep;
 };
-typedef enum { A, B, C, D, E, F, G, H, I, J, K, L, M ,N, O, P, Q, R, S, T, U, V, W, X, Y, Z, NACUTE, UNDERSCORE} Letter;
 
-Dictionary dict_create(){
-    Dictionary dict = (Dictionary)calloc(1, sizeof(struct srtDictionaryHead));
-    return dict;
+Dictionary dict_create() {
+	Dictionary dict = (Dictionary)calloc(1, sizeof(struct srtDictionaryHead));
+	return dict;
 }
 
-unsigned int dict_size(Dictionary d){
-    return d->deep;
+unsigned int dict_size(Dictionary d) {
+	return d->deep;
 }
 
-void set_node_data(Node n, Text word, Text key, Text def){
-    n->key = text_clone(key);
-    n->word = text_clone(word);
-    n->def = text_clone(def);
+void set_node_data(Node n, Text word, Text key, Text def) {
+	n->key = text_clone(key);
+	n->word = text_clone(word);
+	n->def = text_clone(def);
 }
 
-void dict_set(Dictionary d, Text word, Text def){
-    //Si se agragó el elemento, la bandera será falso
-    bool flag = true;
-    int cursor_pos = 0;
-    unsigned char cursor_value = 0;
-    Node n = d->initial;
-    Text compare_word = text_ansi(word);
-    compare_word = text_toUpperCase(word);
-    //Si es el primer nodo
-    if(n == NULL){
-        n = (Node) malloc(sizeof(struct strNode));
-        set_node_data(n, word, compare_word, def);
-        flag = false;
-    }
+void dict_set(Dictionary d, Text word, Text def) {
+	//Si se agragó el elemento, la bandera será falso
+	Bool flag = TRUE;
+	int cursor_pos = 0;
+	unsigned char cursor_value = 0;
+	Node n = NULL;
+	Text compare_word = text_ansi(word);
+	compare_word = text_toUpperCase(word);
 
-    // TODO: Aquí puede tronar si recorrimos toda la palabra y no encontramos coincidencia
-    while(flag){
-        cursor_value = text_charAt(word, cursor_pos);
-        switch(cursor_value){
-            case 'A':
-                n = n->a;
-                break;
-            case 'B':
-                n = n->b;
-                break;
-            case 'C':
-                n = n->c;
-                break;
-            case 'D':
-                n = n->d;
-                break;
-            case 'E':
-                n = n->e;
-                break;
-            case 'F':
-                n = n->f;
-                break;
-            case 'G':
-                n = n->g;
-                break;
-            case 'H':
-                n = n->h;
-                break;
-            case 'I':
-                n = n->i;
-                break;
-            case 'J':
-                n = n->j;
-                break;
-            case 'K':
-                n = n->k;
-                break;
-            case 'L':
-                n = n->l;
-                break;
-            case 'M':
-                n = n->m;
-                break;
-            case 'N':
-                n = n->n;
-                break;
-            case 165:
-                n = n->nacute;
-                break;
-            case 'O':
-                break;
-            case 'P':
-                n = n->p;
-                break;
-            case 'Q':
-                n = n->q;
-                break;
-            case 'R':
-                n = n->r;
-                break;
-            case 'S':
-                n = n->s;
-                break;
-            case 'T':
-                n = n->t;
-                break;
-            case 'U':
-                n = n->u;
-                break;
-            case 'V':
-                n = n->v;
-                break;
-            case 'W':
-                n = n->w;
-                break;
-            case 'X':
-                n = n->x;
-                break;
-            case 'Y':
-                n = n->y;
-                break;
-            case 'Z':
-                n = n->z;
-                break;
-            case '_':
-                n = n->underscore;
-            break;
-        }
-        if(n == NULL){
-            n = (Node) malloc(sizeof(struct strNode));
-            set_node_data(n, word, compare_word, def);
-            flag = false;
-        }
-        cursor_pos++;
-    }
-    if(!flag){
-        d->deep++;
-    }
+	text_println(compare_word);
+
+	//Si es el primer nodo
+	if (d->initial == NULL) {
+		d->initial = (Node)calloc(1, sizeof(struct strNode));
+		set_node_data(d->initial, word, compare_word, def);
+		flag = FALSE;
+	}
+
+	n = d->initial;
+
+	// TODO: Aquí puede tronar si recorrimos toda la palabra y no encontramos coincidencia
+	while (flag) {
+		cursor_value = text_charAt(word, cursor_pos);
+		switch (cursor_value) {
+		case 'A':
+			if (n->a == NULL) {
+				n->a = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->a, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->a;
+			break;
+		case 'B':
+			if (n->b == NULL) {
+				n->b = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->b, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->b;
+			break;
+		case 'C':
+			if (n->c == NULL) {
+				n->c = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->c, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->c;
+			break;
+		case 'D':
+			if (n->d == NULL) {
+				n->d = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->d, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->d;
+			break;
+		case 'E':
+			if (n->e == NULL) {
+				n->e = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->e, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->e;
+			break;
+		case 'F':
+			if (n->f == NULL) {
+				n->f = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->f, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->f;
+			break;
+		case 'G':
+			if (n->g == NULL) {
+				n->g = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->g, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->g;
+			break;
+		case 'H':
+			if (n->h == NULL) {
+				n->h = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->h, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->h;
+			break;
+		case 'I':
+			if (n->i == NULL) {
+				n->i = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->i, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->i;
+			break;
+		case 'J':
+			if (n->j == NULL) {
+				n->j = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->j, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->j;
+			break;
+		case 'K':
+			if (n->k == NULL) {
+				n->k = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->k, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->k;
+			break;
+		case 'L':
+			if (n->n == NULL) {
+				n->n = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->n, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->l;
+			break;
+		case 'M':
+			if (n->m == NULL) {
+				n->m = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->m, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->m;
+			break;
+		case 'N':
+			if (n->n == NULL) {
+				n->n = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->n, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->n;
+			break;
+		case (char)NACUTE_UPPER:
+			if (n->nacute == NULL) {
+				n->nacute = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->nacute, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->nacute;
+			break;
+		case 'O':
+			if (n->o == NULL) {
+				n->o = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->o, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->o;
+			break;
+		case 'P':
+			if (n->p == NULL) {
+				n->p = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->p, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->p;
+			break;
+		case 'Q':
+			if (n->q == NULL) {
+				n->q = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->q, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->q;
+			break;
+		case 'R':
+			if (n->r == NULL) {
+				n->r = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->r, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->r;
+			break;
+		case 'S':
+			if (n->s == NULL) {
+				n->s = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->s, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->s;
+			break;
+		case 'T':
+			if (n->t == NULL) {
+				n->t = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->t, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->t;
+			break;
+		case 'U':
+			if (n->u == NULL) {
+				n->u = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->u, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->u;
+			break;
+		case 'V':
+			if (n->v == NULL) {
+				n->v = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->v, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->v;
+			break;
+		case 'W':
+			if (n->w == NULL) {
+				n->w = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->w, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->w;
+			break;
+		case 'X':
+			if (n->x == NULL) {
+				n->x = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->x, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->x;
+			break;
+		case 'Y':
+			if (n->y == NULL) {
+				n->y = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->y, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->y;
+			break;
+		case 'Z':
+			if (n->z == NULL) {
+				n->z->underscore = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->z, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->z;
+			break;
+		case '_':
+			if (n->underscore == NULL) {
+				n->underscore = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->underscore, word, compare_word, def);
+				flag = FALSE;
+			}
+			n = n->underscore;
+			break;
+		}
+		
+		cursor_pos++;
+	}
+	if (!flag) {
+		d->deep++;
+	}
 }
 
-Text dict_get(Dictionary dict, Text word){
-    int cursor_pos = 0;
-    unsigned char cursor_value = 0;
-    Node n = dict->initial;
-    Text compare_word = text_ansi(word);
-    compare_word = text_toUpperCase(word);
-    Text return_text = NULL;
-    bool flag = true;
+Text dict_get(Dictionary dict, Text word) {
+	int cursor_pos = 0;
+	unsigned char cursor_value = 0;
+	Node n = dict->initial;
+	Text compare_word = text_ansi(word);
+	compare_word = text_toUpperCase(word);
+	Text return_text = NULL;
+	Bool flag = TRUE;
 
-    if(n == NULL){
-        // Manejar que el nodo inicial es null
-        flag = false;
+	if (n == NULL) {
+		// Manejar que el nodo inicial es null
+		flag = FALSE;
+	} else if(!text_compare(n->key, compare_word)) {
+        // La palabra está en el nodo raiz
+        flag = FALSE;
     }
 
-    while(text_compare(n->key, compare_word) && flag){
-        cursor_value = text_charAt(word, cursor_pos);
-        switch(cursor_value){
-            case 'A':
-                n = n->a;
-                break;
-            case 'B':
-                n = n->b;
-                break;
-            case 'C':
-                n = n->c;
-                break;
-            case 'D':
-                n = n->d;
-                break;
-            case 'E':
-                n = n->e;
-                break;
-            case 'F':
-                n = n->f;
-                break;
-            case 'G':
-                n = n->f;
-                break;
-            case 'H':
-                n = n->h;
-                break;
-            case 'I':
-                n = n->i;
-                break;
-            case 'J':
-                n = n->j;
-                break;
-            case 'K':
-                n = n->k;
-                break;
-            case 'L':
-                n = n->l;
-                break;
-            case 'M':
-                n = n->m;
-                break;
-            case 'N':
-                n = n->n;
-                break;
-            case 'O':
-                n = n->o;
-                break;
-            case 'P':
-                n = n->p;
-                break;
-            case 'R':
-                n = n->r;
-                break;
-            case 'S':
-                n = n->s;
-                break;
-            case 'T':
-                n = n->t;
-                break;
-            case 'U':
-                n = n->u;
-                break;
-            case 'V':
-                n = n->v;
-                break;
-            case 'W':
-                n = n->w;
-                break;
-            case 'X':
-                n = n->x;
-                break;
-            case 'Y':
-                n = n->y;
-                break;
-            case 'Z':
-                n = n->z;
-                break;
-            case '_':
-                n = n->underscore;
-                break;
-            // TODO: Reemplazar Ñ con el código ascii
-            case 165:
-                n = n->nacute;
-                break;
-        }
-        // Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo
-        if(n == NULL){
-            // Manejar que no exixtieron coinidencias
-            flag = false;
-        }
-        cursor_pos++;
-    }
-    return_text = n->def;
-    return return_text;
+	while (flag && text_compare(n->key, compare_word)) {
+		cursor_value = text_charAt(word, cursor_pos);
+		switch (cursor_value) {
+		case 'A':
+			n = n->a;
+			break;
+		case 'B':
+			n = n->b;
+			break;
+		case 'C':
+			n = n->c;
+			break;
+		case 'D':
+			n = n->d;
+			break;
+		case 'E':
+			n = n->e;
+			break;
+		case 'F':
+			n = n->f;
+			break;
+		case 'G':
+			n = n->f;
+			break;
+		case 'H':
+			n = n->h;
+			break;
+		case 'I':
+			n = n->i;
+			break;
+		case 'J':
+			n = n->j;
+			break;
+		case 'K':
+			n = n->k;
+			break;
+		case 'L':
+			n = n->l;
+			break;
+		case 'M':
+			n = n->m;
+			break;
+		case 'N':
+			n = n->n;
+			break;
+		case 'O':
+			n = n->o;
+			break;
+		case 'P':
+			n = n->p;
+			break;
+		case 'R':
+			n = n->r;
+			break;
+		case 'S':
+			n = n->s;
+			break;
+		case 'T':
+			n = n->t;
+			break;
+		case 'U':
+			n = n->u;
+			break;
+		case 'V':
+			n = n->v;
+			break;
+		case 'W':
+			n = n->w;
+			break;
+		case 'X':
+			n = n->x;
+			break;
+		case 'Y':
+			n = n->y;
+			break;
+		case 'Z':
+			n = n->z;
+			break;
+		case '_':
+			n = n->underscore;
+			break;
+			// TODO: Reemplazar Ñ con el código ascii
+		case (char)NACUTE_UPPER:
+			n = n->nacute;
+			break;
+		}
+		// Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
+		if (n == NULL) {
+			// Manejar que no exixtieron coinidencias
+			flag = FALSE;
+		}
+		cursor_pos++;
+	}
+	if (!flag) {
+		return_text = text_create("Palabra no encontrada");
+	}
+	else {
+		return_text = n->def;
+	}
+	
+	return return_text;
 }
 
 char** dict_keys (Dictionary d)
