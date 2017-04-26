@@ -308,12 +308,25 @@ char** dict_keys (Dictionary d)
     unsigned int level = 1;
     //Bandera que dice si hubo un cambio en el nivel
     bool changed;
-    while(i < d->deep)
+    Bool finish = FALSE;
+    if(d->deep > 0)
+    {
+        stack_push(s, d);
+        alm[i] = text_getChars(n->word);
+        i++;
+    }
+    while(i < d->deep || !finish)
     {
         changed = false;
         counter[level] = A;
         switch (counter[level])
         {
+            /*
+            Se va a evaluar el contrador counter en el nivel del arbol que esté.
+            Dependiendo de la letra en la que vaya, preguntara si es nulo; si sí es nulo,
+            el auxiliar cambiara y se bajará un nivel, de lo contrario continuará con la
+            siguiente letra
+            */
             case A:
                 if (n->a != NULL) {
                     n = n->a;
@@ -525,10 +538,15 @@ char** dict_keys (Dictionary d)
         else
         {
             if (!stack_isEmpty(s)) {
+                //Eliminamos el ultimo elemento para regresar en el tiempo
+                //al nivel superior
                 stack_pop(s);
                 n = stack_top(s);
                 level --;
             }
+            //Si el stack esta vacio significa que estamos en el elemento raiz
+            //Y si no hubo cambios, debe terminar el ciclo
+            else finish = TRUE;
         }
         counter = (Letter*)realloc(counter, level * sizeof(Letter));
     }
