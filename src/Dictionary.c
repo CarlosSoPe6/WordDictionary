@@ -320,7 +320,7 @@ void dict_set(Dictionary d, Text word, Text def) {
 			n = n->underscore;
 			break;
 		}
-		
+
 		cursor_pos++;
 	}
 	if (!flag) {
@@ -431,7 +431,7 @@ Text dict_get(Dictionary dict, Text word) {
 			n = n->nacute;
 			break;
 		}
-		// Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo 
+		// Vamos al caracter siquiente, al inicio del hacemos la comparación para salir del nodo
 		if (n == NULL) {
 			// Manejar que no exixtieron coinidencias
 			flag = FALSE;
@@ -444,10 +444,11 @@ Text dict_get(Dictionary dict, Text word) {
 	else {
 		return_text = n->def;
 	}
-	
+
 	return return_text;
 }
 
+/*
 char** dict_keys (Dictionary d)
 {
     //Aquí se van a almacenar los apuntadores a las palabras
@@ -470,10 +471,9 @@ char** dict_keys (Dictionary d)
         alm[i] = text_getChars(n->word);
         i++;
     }
-    while(i < d->deep || !finish)
+    while(i < d->deep && !finish)
     {
         changed = false;
-        counter[level] = A;
         switch (counter[level])
         {
             /*
@@ -481,7 +481,7 @@ char** dict_keys (Dictionary d)
             Dependiendo de la letra en la que vaya, preguntara si es nulo; si sí es nulo,
             el auxiliar cambiara y se bajará un nivel, de lo contrario continuará con la
             siguiente letra
-            */
+            /*
             case A:
                 if (n->a != NULL) {
                     n = n->a;
@@ -683,6 +683,7 @@ char** dict_keys (Dictionary d)
         {
             //El nivel aumenta
             level ++;
+            counter[level] = A;
             //Se hace el push en el stack
             stack_push(s, n);
             //Se agrega al arreglo
@@ -709,4 +710,45 @@ char** dict_keys (Dictionary d)
     free(n);
     free(counter);
     return alm;
+}*/
+void capBrench(Node n, char ***array, int *i)
+{
+	(*array)[*i] = text_getChars(n->word);
+	(*i)++;
+	if(n->a != NULL) capBrench(n->a, array, i)
+	if(n->b != NULL) capBrench(n->b, array, i)
+	if(n->c != NULL) capBrench(n->c, array, i)
+	if(n->d != NULL) capBrench(n->d, array, i)
+	if(n->e != NULL) capBrench(n->e, array, i)
+	if(n->f != NULL) capBrench(n->f, array, i)
+	if(n->g != NULL) capBrench(n->g, array, i)
+	if(n->h != NULL) capBrench(n->h, array, i)
+	if(n->i != NULL) capBrench(n->i, array, i)
+	if(n->j != NULL) capBrench(n->j, array, i)
+	if(n->k != NULL) capBrench(n->k, array, i)
+	if(n->l != NULL) capBrench(n->l, array, i)
+	if(n->m != NULL) capBrench(n->m, array, i)
+	if(n->n != NULL) capBrench(n->n, array, i)
+	if(n->nacute != NULL) capBrench(n->nacute, array, i)
+	if(n->o != NULL) capBrench(n->o, array, i)
+	if(n->p != NULL) capBrench(n->p, array, i)
+	if(n->q != NULL) capBrench(n->q, array, i)
+	if(n->r != NULL) capBrench(n->r, array, i)
+	if(n->s != NULL) capBrench(n->s, array, i)
+	if(n->t != NULL) capBrench(n->t, array, i)
+	if(n->u != NULL) capBrench(n->u, array, i)
+	if(n->v != NULL) capBrench(n->v, array, i)
+	if(n->w != NULL) capBrench(n->w, array, i)
+	if(n->x != NULL) capBrench(n->x, array, i)
+	if(n->y != NULL) capBrench(n->y, array, i)
+	if(n->z != NULL) capBrench(n->z, array, i)
+	if(n->underscore != NULL) capBrench(n->underscore, array, i)
+}
+
+char** dict_keys (Dictionary d)
+{
+	int i = 0;
+	char **array = (char**)malloc(sizeof(char) * d->deep);
+	capBrench(d->initial, &array, &i);
+	retrurn array;
 }
