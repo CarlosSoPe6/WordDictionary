@@ -437,8 +437,7 @@ Text dict_get(Dictionary dict, Text word) {
 	}
 	if (!flag) {
 		return_text = text_create("Palabra no encontrada");
-	}
-	else {
+	} else {
 		return_text = n->def;
 	}
 	
