@@ -42,46 +42,46 @@ Text text_create(const char *chars) {
 	for (i = 0; i < text->length; i++) {
 		switch (chars[i])
 		{
-		case '�':
+		case 'ñ':
 			text->chars[i] = NACUTE_LOWER;
 			break;
-		case '�':
+		case 'Ñ':
 			text->chars[i] = NACUTE_UPPER;
 			break;
 
-		case '�':
-			text->chars[i] = AACUTE_LOWER;
+		case 'á':
+			text->chars[i] = 'a';
 			break;
-		case '�':
-			text->chars[i] = AACUTE_UPPER;
-			break;
-
-		case '�':
-			text->chars[i] = EACUTE_LOWER;
-			break;
-		case '�':
-			text->chars[i] = EACUTE_UPPER;
+		case 'Á':
+			text->chars[i] = 'A';
 			break;
 
-		case '�':
-			text->chars[i] = IACUTE_LOWER;
+		case 'é':
+			text->chars[i] = 'e';
 			break;
-		case '�':
-			text->chars[i] = IACUTE_UPPER;
-			break;
-
-		case '�':
-			text->chars[i] = OACUTE_LOWER;
-			break;
-		case '�':
-			text->chars[i] = OACUTE_UPPER;
+		case 'É':
+			text->chars[i] = 'E';
 			break;
 
-		case '�':
-			text->chars[i] = UACUTE_LOWER;
+		case 'í':
+			text->chars[i] = 'i';
 			break;
-		case '�':
-			text->chars[i] = UACUTE_UPPER;
+		case 'Í':
+			text->chars[i] = 'I';
+			break;
+
+		case 'ó':
+			text->chars[i] = 'o';
+			break;
+		case 'Ó':
+			text->chars[i] = 'O';
+			break;
+
+		case 'ú':
+			text->chars[i] = 'u';
+			break;
+		case 'Ú':
+			text->chars[i] = 'U';
 			break;
 
 		default:
@@ -124,9 +124,9 @@ Text text_toLowerCase(Text text)
 		{
 			text->chars[i] += 32;
 		}
-		//Si es � (165 en ASCII)
+		//Si es Ñ (165 en ASCII)
 		if (text->chars[i] == (char)165)
-			text->chars[i]++;//La � se encuentra una posicion arriba que � en ASCII
+			text->chars[i]++;//La ñ se encuentra una posicion arriba que Ñ en ASCII
 	}
 	Text out = text_create((char *)text->chars);
 	return out;
@@ -143,7 +143,7 @@ Text text_toUpperCase(Text text)
 		{
 			text->chars[i] -= 32;
 		}
-		//Si es � (164 en ASCII)
+		//Si es ñ (164 en ASCII)
 		switch (text->chars[i])
 		{
 		case (char)NACUTE_LOWER:
@@ -226,13 +226,13 @@ Text text_ansi(Text t)
 	unsigned int len = t->length;
 	unsigned int i;
 	for (i = 0; i < len; i++) {
-		//Si la letra es �, �, �, �
+		//Si la letra es á, í, ó, ú
 		if (t->chars[i] >= 160 && t->chars[i] <= 163) {
 			//Se le van a restar 63, que es la diferencia en ASCII con sus respectivas sin acento
-			//Ejemplo: � = 160, a = 97
+			//Ejemplo: á = 160, a = 97
 			t->chars[i] -= 63;
 		}
-		//Si la no est� de la 'A' a la 'Z' ni de la 'a' a la 'z', incluyendo las �'s
+		//Si la no está de la 'A' a la 'Z' ni de la 'a' a la 'z', incluyendo las ñ's
 		else if (!(!(t->chars[i] >= 'A' && t->chars[i] <= 'Z') || !(t->chars[i] >= 'a' && t->chars[i] <= 'z') || (t->chars[i] != NACUTE_UPPER && t->chars[i] != NACUTE_LOWER)))
 		{
 			//Para todas las demas vocales con acento dispersas en ASCII
@@ -269,8 +269,8 @@ char text_charAt(Text t, int p)
 	return t->chars[p];
 }
 
-bool text_compare(Text t1, Text t2){
-    return strcmp((const char*)t1->chars, (const char*)t2->chars);
+Bool text_compare(Text t1, Text t2) {
+	return strcmp((const char*)t1->chars, (const char*)t2->chars);
 }
 
 char* text_getChars(Text t)

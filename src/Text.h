@@ -1,10 +1,3 @@
-/*
-* Text.h
-*
-*  Created on: 15/03/2017
-*      Author: hpiza
-*/
-
 #include "Bool.h"
 
 #ifndef TEXT_H_
