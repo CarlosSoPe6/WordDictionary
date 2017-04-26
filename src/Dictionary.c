@@ -341,7 +341,11 @@ Text dict_get(Dictionary dict, Text word) {
 		// Manejar que el nodo inicial es null
 		flag = FALSE;
 	}
-
+	else if (!text_compare(n->key, compare_word)) {
+		// La palabra está en la raiz
+		flag = FALSE;
+	}
+    
 	while (flag && text_compare(n->key, compare_word)) {
 		cursor_value = text_charAt(word, cursor_pos);
 		switch (cursor_value) {
