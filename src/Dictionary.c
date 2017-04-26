@@ -340,7 +340,10 @@ Text dict_get(Dictionary dict, Text word) {
 	if (n == NULL) {
 		// Manejar que el nodo inicial es null
 		flag = FALSE;
-	}
+	} else if(!text_compare(n->key, compare_word)) {
+        // La palabra está en el nodo raiz
+        flag = FALSE;
+    }
 
 	while (flag && text_compare(n->key, compare_word)) {
 		cursor_value = text_charAt(word, cursor_pos);
@@ -437,7 +440,8 @@ Text dict_get(Dictionary dict, Text word) {
 	}
 	if (!flag) {
 		return_text = text_create("Palabra no encontrada");
-	} else {
+	}
+	else {
 		return_text = n->def;
 	}
 	
