@@ -15,7 +15,7 @@ Dictionary dict_create();
 unsigned int dict_size(Dictionary);
 void dict_set(Dictionary, Text, Text);
 Text dict_get(Dictionary, Text);
-void dict_destroy();
+void dict_destroy(Dictionary);
 char** dict_keys (Dictionary);
 
 #endif

@@ -56,6 +56,22 @@ struct srtDictionaryHead {
 	unsigned int deep;
 };
 
+struct strNavigator {
+	Node node;
+	Letter current;
+};
+
+typedef struct strNavigator * Navigator;
+
+/*
+Navigator def
+*/
+
+Navigator navigator_create() {
+	Navigator n = (Navigator)calloc(1, sizeof(struct strNavigator));
+	return n;
+}
+
 Dictionary dict_create() {
 	Dictionary dict = (Dictionary)calloc(1, sizeof(struct srtDictionaryHead));
 	return dict;
@@ -751,4 +767,285 @@ char** dict_keys (Dictionary d)
 	char **array = (char**)malloc(sizeof(char) * d->deep);
 	capBrench(d->initial, &array, &i);
 	return array;
+}
+
+void dict_destroy(Dictionary d) {
+	Stack time_machine = NULL;
+	Bool flag = FALSE;
+	Navigator navigator = NULL;
+	Node aux = NULL;
+
+	if (d->initial != NULL) {
+		time_machine = stack_create();
+		navigator = navigator_create();
+		navigator->current = A;
+		navigator->node = d->initial;
+		flag = TRUE;
+	}	
+
+	while (navigator != NULL) {
+		aux = navigator->node;
+		switch (navigator->current) {
+		case A:
+			if (navigator->node->a != NULL) {
+				navigator->current = B;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->a;
+				break;
+			}
+		case B:
+			if (navigator->node->b != NULL) {
+				navigator->current = C;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->b;
+				break;
+			}
+		case C:
+			if (navigator->node->c != NULL) {
+				navigator->current = D;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->c;
+				break;
+			}
+		case D:
+			if (navigator->node->d != NULL) {
+				navigator->current = E;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->d;
+				break;
+			}
+		case E:
+			if (navigator->node->e != NULL) {
+				navigator->current = F;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->e;
+				break;
+			}
+		case F:
+			if (navigator->node->f != NULL) {
+				navigator->current = G;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->f;
+				break;
+			}
+		case G:
+			if (navigator->node->g != NULL) {
+				navigator->current = H;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->g;
+				break;
+			}
+		case H:
+			if (navigator->node->h!= NULL) {
+				navigator->current = I;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->h;
+				break;
+			}
+		case I:
+			if (navigator->node->i != NULL) {
+				navigator->current = J;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->i;
+				break;
+			}
+		case J:
+			if (navigator->node->j != NULL) {
+				navigator->current = K;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->j;
+				break;
+			}
+		case K:
+			if (navigator->node->k != NULL) {
+				navigator->current = L;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->k;
+				break;
+			}
+		case L:
+			if (navigator->node->l != NULL) {
+				navigator->current = M;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->l;
+				break;
+			}
+		case M:
+			if (navigator->node->m != NULL) {
+				navigator->current = N;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->m;
+				break;
+			}
+		case N:
+			if (navigator->node->n != NULL) {
+				navigator->current = O;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->n;
+				break;
+			}
+		case O:
+			if (navigator->node->o != NULL) {
+				navigator->current = P;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->o;
+				break;
+			}
+		case P:
+			if (navigator->node->p != NULL) {
+				navigator->current = Q;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->p;
+				break;
+			}
+		case Q:
+			if (navigator->node->q != NULL) {
+				navigator->current = R;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->q;
+				break;
+			}
+		case R:
+			if (navigator->node->r != NULL) {
+				navigator->current = S;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->r;
+				break;
+			}
+		case S:
+			if (navigator->node->s != NULL) {
+				navigator->current = T;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->s;
+				break;
+			}
+		case T:
+			if (navigator->node->t != NULL) {
+				navigator->current = U;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->t;
+				break;
+			}
+		case U:
+			if (navigator->node->u != NULL) {
+				navigator->current = V;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->u;
+				break;
+			}
+		case V:
+			if (navigator->node->v != NULL) {
+				navigator->current = W;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->v;
+				break;
+			}
+		case W:
+			if (navigator->node->w != NULL) {
+				navigator->current = X;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->w;
+				break;
+			}
+		case X:
+			if (navigator->node->x != NULL) {
+				navigator->current = Y;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->x;
+				break;
+			}
+		case Y:
+			if (navigator->node->y != NULL) {
+				navigator->current = Z;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->y;
+				break;
+			}
+		case Z:
+			if (navigator->node->z != NULL) {
+				navigator->current = NACUTE;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->z;
+				break;
+			}
+		case NACUTE:
+			if (navigator->node->nacute != NULL) {
+				navigator->current = UNDERSCORE;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->nacute;
+				break;
+			}
+		case UNDERSCORE:
+			if (navigator->node->underscore != NULL) {
+				navigator->current = UNDERSCORE + 1;
+				stack_push(time_machine, navigator);
+
+				navigator = navigator_create();
+				navigator->node = aux->underscore;
+				break;
+			}
+		default:
+			free(navigator->node->def);
+			free(navigator->node->word);
+			free(navigator->node->key);
+			free(navigator->node);
+			free(navigator);
+			navigator = stack_pop(time_machine);
+		}
+		
+	}
 }
