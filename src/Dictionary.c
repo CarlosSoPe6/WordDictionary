@@ -501,7 +501,7 @@ void capBrench(Node n, char ***array, int *i)
 char** dict_keys (Dictionary d)
 {
 	int i = 0;
-	char **array = (char**)malloc(sizeof(char) * d->deep);
+	char **array = (char**)malloc(sizeof(char*) * d->deep);
 	capBrench(d->initial, &array, &i);
 	return array;
 }
