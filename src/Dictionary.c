@@ -96,8 +96,6 @@ void dict_set(Dictionary d, Text word, Text def) {
 	Text compare_word = text_ansi(word);
 	compare_word = text_toUpperCase(word);
 
-	text_println(compare_word);
-
 	//Si es el primer nodo
 	if (d->initial == NULL) {
 		d->initial = (Node)calloc(1, sizeof(struct strNode));
