@@ -2,6 +2,12 @@
  * main.c
  * Impementación del TDA Dictionary
  */
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include "Bool.h"
+ #include "Dictionary.h"
+ #include "Stack.h"
+ #include "Text.h"
 
  void insertWord(Dictionary d)
  {
