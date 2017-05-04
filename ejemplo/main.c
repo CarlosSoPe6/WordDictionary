@@ -4,6 +4,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "Bool.h"
 #include "Dictionary.h"
 #include "Stack.h"
@@ -14,7 +15,6 @@ int main() {
 	Text definition = NULL;
 	Dictionary dictionary = NULL;
 
-	char aaa;
 	char** a;
 
 	printf("Bienvenido al dicionario, estamos agregando palabras para fines ilustrativos\n");
@@ -53,20 +53,25 @@ int main() {
 	word = text_create("Casa");
 	definition = dict_get(dictionary, word);
 	text_println(definition);
-	//scanf_s("%c", &aaa);
 
 	word = text_create("PiZza");
 	definition = dict_get(dictionary, word);
 	text_println(definition);
-	//scanf_s("%c", &aaa);
 
 	word = text_create("PIñA");
 	definition = dict_get(dictionary, word);
 	text_println(definition);
 
 	a = dict_keys(dictionary);
+	int deep = dict_getSize(dictionary);
+	printf("///////////////////////////////\n");
+	for (int i = 0; i < deep; i++)
+	{
+		puts(a[i]);
+	}
 
-	scanf_s("%c", &aaa);
+	dict_destroy(dictionary);
+	system("pause");
 
 	return 0;
 }

@@ -51,7 +51,7 @@ Type  stack_top(Stack st) {
 		return st->top->data;
 }
 
-bool  stack_isEmpty(Stack st) {
+Bool  stack_isEmpty(Stack st) {
 	return st->top == NULL;
 }
 

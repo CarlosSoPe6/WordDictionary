@@ -17,5 +17,6 @@ void dict_set(Dictionary, Text, Text);
 Text dict_get(Dictionary, Text);
 void dict_destroy(Dictionary);
 char** dict_keys (Dictionary);
+int dict_getSize(Dictionary);
 
 #endif
