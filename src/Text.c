@@ -94,6 +94,25 @@ Text text_create(const char *chars) {
 	return text;
 }
 
+Text text_readLine(Text t){
+	Text temp;
+	if(t != NULL){
+		temp = t; 
+	}else{
+		temp = (Text)malloc(sizeof(struct strText));
+		temp->size = 1;
+		temp->chars = (char *)calloc(sizeof(char));
+	}
+	char c;
+	while((c=getchar()) != EOF){
+		temp->chars = realoc(temp->chars, sizeof(char) * temp->size + 1);
+		temp->chars[temp->size-1] = c;
+		temp->size++;
+	}
+	temp->chars[temp->size] = '\0';
+	return temp;
+}
+
 Text text_clone(Text orig) {
 	Text the_clone = text_create((char *)orig->chars);
 	return the_clone;

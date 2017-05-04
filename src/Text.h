@@ -35,4 +35,6 @@ Bool text_compare(Text, Text);
 
 char* text_getChars(Text);
 
+Text text_readLine(Text);
+
 #endif /* TEXT_H_ */
