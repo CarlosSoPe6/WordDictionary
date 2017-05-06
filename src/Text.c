@@ -1,9 +1,7 @@
-/*
-* Text.c
-*
-*  Created on: 15/03/2017
-*      Author: hpiza
-*/
+/**
+ * TDA Text
+ * Text.h
+ */
 
 #include "Bool.h"
 #include "Text.h"
@@ -12,22 +10,22 @@
 #include <string.h>
 
 #define NACUTE_UPPER 165
-#define NACUTE_LOWER 164 
+#define NACUTE_LOWER 164
 
 #define AACUTE_UPPER 181
-#define AACUTE_LOWER 160 
+#define AACUTE_LOWER 160
 
 #define EACUTE_UPPER 144
 #define EACUTE_LOWER 130
 
 #define IACUTE_UPPER 214
-#define IACUTE_LOWER 161 
+#define IACUTE_LOWER 161
 
 #define OACUTE_UPPER 224
-#define OACUTE_LOWER 162 
+#define OACUTE_LOWER 162
 
 #define UACUTE_UPPER 233
-#define UACUTE_LOWER 163 
+#define UACUTE_LOWER 163
 
 struct strText {
 	char *chars;
@@ -89,27 +87,27 @@ Text text_create(const char *chars) {
 			break;
 		}
 	}
-	text->chars[text->length] = '\0';
 
+	text->chars[text->length] = '\0';
 	return text;
 }
 
 Text text_readLine(Text t){
 	Text temp;
 	if(t != NULL){
-		temp = t; 
+		temp = t;
 	}else{
 		temp = (Text)malloc(sizeof(struct strText));
-		temp->size = 1;
-		temp->chars = (char *)calloc(sizeof(char));
+		temp->length = 1;
+		temp->chars = (char *)calloc(1, sizeof(char));
 	}
 	char c;
 	while((c=getchar()) != EOF){
-		temp->chars = realoc(temp->chars, sizeof(char) * temp->size + 1);
-		temp->chars[temp->size-1] = c;
-		temp->size++;
+		temp->chars = realloc(temp->chars, sizeof(char) * temp->length + 1);
+		temp->chars[temp->length-1] = c;
+		temp->length++;
 	}
-	temp->chars[temp->size] = '\0';
+	temp->chars[temp->length] = '\0';
 	return temp;
 }
 

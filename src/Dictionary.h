@@ -1,6 +1,5 @@
 /**
  * Dictionary.h
- * TDA dictionary
  */
 
 #include "Bool.h"

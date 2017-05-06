@@ -1,5 +1,6 @@
 /**
- * Stack.c
+ * TDA Stack
+ * Stack.h
  */
 
 #include "Stack.h"

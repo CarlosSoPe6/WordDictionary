@@ -1,3 +1,7 @@
+/**
+ * Text.h
+ */
+
 #include "Bool.h"
 
 #ifndef TEXT_H_
