@@ -356,7 +356,7 @@ Text dict_get(Dictionary dict, Text word) {
 		flag = FALSE;
 	} else if(!text_compare(n->key, compare_word)) {
         // La palabra está en el nodo raiz
-        flag = FALSE;
+        flag = TRUE;
     }
 
 	while (flag && text_compare(n->key, compare_word)) {

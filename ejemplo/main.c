@@ -31,15 +31,15 @@
 
  void getDefinition(Dictionary d)
  {
-     char *aux = (char*) malloc(100 * sizeof(char));
-     //El primer gets nunca funciona
-     gets(aux);
+    char *aux = (char*) malloc(100 * sizeof(char));
+    //El primer gets nunca funciona
+    gets(aux);
   	printf("Dame la palabra a buscar\n");
-     gets(aux);
-     aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
+    gets(aux);
+    aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
  	Text word = text_create(aux);
-     printf("Definicion: ");
-  	Text definition = dict_get(d, word);
+    printf("Definicion: ");
+    Text definition = dict_get(d, word);
   	text_println(definition);
  }
 
@@ -81,9 +81,9 @@
  	definition = text_create("Persona que te dio a luz");
  	dict_set(dictionary, word, definition);
 
- 	word = text_create("Ballena");
- 	definition = text_create("Mamifero marino");
-    dict_set(dictionary, word, definition);
+// 	word = text_create("Ballena");
+//    definition = text_create("Mamifero marino");
+//    dict_set(dictionary, word, definition);
 
  	word = text_create("Bebe");
  	definition = text_create("Persona chiquita");
