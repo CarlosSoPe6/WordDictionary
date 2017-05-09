@@ -5,10 +5,10 @@
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
- #include <Bool.h>
- #include <Dictionary.h>
- #include <Stack.h>
- #include <Text.h>
+ #include "Bool.h"
+ #include "Dictionary.h"
+ #include "Stack.h"
+ #include "Text.h"
 
  void insertWord(Dictionary d)
  {

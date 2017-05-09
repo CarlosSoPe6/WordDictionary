@@ -2,3 +2,12 @@
 *.o
 *.a
 *.exe
+ejemplo/Stack.c
+ejemplo/Stack.h
+ejemplo/Dictionary.c
+ejemplo/Dictionary.h
+ejemplo/Text.c
+ejemplo/Text.h
+ejemplo/*.o
+ejemplo/*.exe
+ejemplo/Bool.h
