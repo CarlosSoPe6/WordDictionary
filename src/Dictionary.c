@@ -93,8 +93,11 @@ void dict_set(Dictionary d, Text word, Text def) {
 	int cursor_pos = 0;
 	unsigned char cursor_value = 0;
 	Node n = NULL;
-	Text compare_word = text_ansi(word);
-	compare_word = text_toUpperCase(word);
+	Text compare_word = text_clone(word);
+	compare_word = text_ansi(compare_word);
+	compare_word = text_toUpperCase(compare_word);
+
+	text_println(compare_word);
 
 	//Si es el primer nodo
 	if (d->initial == NULL) {
@@ -106,8 +109,8 @@ void dict_set(Dictionary d, Text word, Text def) {
 	n = d->initial;
 
 	// TODO: Aquí puede tronar si recorrimos toda la palabra y no encontramos coincidencia
-	while (flag) {
-		cursor_value = text_charAt(word, cursor_pos);
+	while (flag && text_compare(n->key, compare_word)) {
+		cursor_value = text_charAt(compare_word, cursor_pos);
 		switch (cursor_value) {
 		case 'A':
 			if (n->a == NULL) {
@@ -198,9 +201,9 @@ void dict_set(Dictionary d, Text word, Text def) {
 			n = n->k;
 			break;
 		case 'L':
-			if (n->n == NULL) {
-				n->n = (Node)calloc(1, sizeof(struct strNode));
-				set_node_data(n->n, word, compare_word, def);
+			if (n->l == NULL) {
+				n->l = (Node)calloc(1, sizeof(struct strNode));
+				set_node_data(n->l, word, compare_word, def);
 				flag = FALSE;
 			}
 			n = n->l;
@@ -221,7 +224,7 @@ void dict_set(Dictionary d, Text word, Text def) {
 			}
 			n = n->n;
 			break;
-		case (unsigned char)NACUTE_UPPER:
+		case NACUTE_UPPER:
 			if (n->nacute == NULL) {
 				n->nacute = (Node)calloc(1, sizeof(struct strNode));
 				set_node_data(n->nacute, word, compare_word, def);
@@ -339,6 +342,8 @@ void dict_set(Dictionary d, Text word, Text def) {
 	}
 	if (!flag) {
 		d->deep++;
+	}else{
+		n->def = def;
 	}
 }
 
@@ -346,8 +351,10 @@ Text dict_get(Dictionary dict, Text word) {
 	int cursor_pos = 0;
 	unsigned char cursor_value = 0;
 	Node n = dict->initial;
-	Text compare_word = text_ansi(word);
-	compare_word = text_toUpperCase(word);
+	Text compare_word = text_clone(word);
+	compare_word = text_ansi(compare_word);
+	compare_word = text_toUpperCase(compare_word);
+
 	Text return_text = NULL;
 	Bool flag = TRUE;
 
@@ -360,7 +367,7 @@ Text dict_get(Dictionary dict, Text word) {
     }
 
 	while (flag && text_compare(n->key, compare_word)) {
-		cursor_value = text_charAt(word, cursor_pos);
+		cursor_value = text_charAt(compare_word, cursor_pos);
 		switch (cursor_value) {
 		case 'A':
 			n = n->a;
@@ -510,7 +517,7 @@ void printBranch(Node n, char letter, int spaces) {
 	for (i = 0; i < spaces; i++) {
 		printf(" ");
 	}
-	printf("[%c] %s\n", letter, text_getChars(n->key));
+	printf("[%c] %s\n", letter, text_getChars(n->word));
 	printBranch(n->a, 'a', spaces + 1);
 	printBranch(n->b, 'b', spaces + 1);
 	printBranch(n->c, 'c', spaces + 1);

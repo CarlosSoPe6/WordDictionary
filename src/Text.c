@@ -185,7 +185,6 @@ Text text_toUpperCase(Text text)
 			break;
 		}
 	}
-
 	return text;
 }
 
@@ -276,6 +275,8 @@ Text text_ansi(Text t)
 			default:
 				t->chars[i] = '_';
 			}
+		}else if (t->chars[i] == '!'){
+			t->chars[i] = '_';
 		}
 	}
 	return t;
