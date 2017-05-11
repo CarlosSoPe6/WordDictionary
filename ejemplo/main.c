@@ -97,7 +97,8 @@
  		printf("1. Insertar palabra\n");
  		printf("2. Obtener definición\n");
  		printf("3. Ver el diccionario completo\n");
- 		printf("4. Salir\n");
+		printf("4. Imprimir la estructura del arbol\n");
+ 		printf("5. Salir\n");
  		scanf("%d", &option);
 
  		switch (option)
@@ -111,7 +112,10 @@
  		case 3:
  			printDict(dictionary);
  			break;
- 		case 4:
+		case 4:
+			dict_print(dictionary);
+			break;
+ 		case 5:
  			end = TRUE;
  			break;
  		default:

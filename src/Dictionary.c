@@ -504,6 +504,47 @@ char** dict_keys (Dictionary d)
 	return array;
 }
 
+void printBranch(Node n, char letter, int spaces) {
+	if (n == NULL) return;
+	int i = 0;
+	for (i = 0; i < spaces; i++) {
+		printf(" ");
+	}
+	printf("[%c] %s\n", letter, text_getChars(n->key));
+	printBranch(n->a, 'a', spaces + 1);
+	printBranch(n->b, 'b', spaces + 1);
+	printBranch(n->c, 'c', spaces + 1);
+	printBranch(n->d, 'd', spaces + 1);
+	printBranch(n->e, 'e', spaces + 1);
+	printBranch(n->f, 'f', spaces + 1);
+	printBranch(n->g, 'g', spaces + 1);
+	printBranch(n->h, 'h', spaces + 1);
+	printBranch(n->i, 'i', spaces + 1);
+	printBranch(n->j, 'j', spaces + 1);
+	printBranch(n->k, 'k', spaces + 1);
+	printBranch(n->l, 'l', spaces + 1);
+	printBranch(n->m, 'm', spaces + 1);
+	printBranch(n->n, 'n', spaces + 1);
+	printBranch(n->nacute, 'ñ', spaces + 1);
+	printBranch(n->o, 'o', spaces + 1);
+	printBranch(n->p, 'p', spaces + 1);
+	printBranch(n->q, 'q', spaces + 1);
+	printBranch(n->r, 'r', spaces + 1);
+	printBranch(n->s, 's', spaces + 1);
+	printBranch(n->t, 't', spaces + 1);
+	printBranch(n->u, 'u', spaces + 1);
+	printBranch(n->v, 'v', spaces + 1);
+	printBranch(n->w, 'w', spaces + 1);
+	printBranch(n->x, 'x', spaces + 1);
+	printBranch(n->y, 'y', spaces + 1);
+	printBranch(n->z, 'z', spaces + 1);
+	printBranch(n->underscore, '_', spaces + 1);
+}
+
+void dict_print(Dictionary d) {
+	printBranch(d->initial, ' ', 0);
+}
+
 void dict_destroy(Dictionary d) {
 	Stack time_machine = NULL;
 	Bool flag = FALSE;
