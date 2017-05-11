@@ -12,19 +12,22 @@
 
  void insertWord(Dictionary d)
  {
-     char *aux = (char*) malloc(100 * sizeof(char));
+     //char *aux = (char*) malloc(100 * sizeof(char));
+	 char aux[256];
      //El primer gets nunca funciona
      gets(aux);
      printf("Dame la palabra: \n");
-     gets(aux);
+     //scanf("%s", aux);
+	 gets(aux);
 
-     aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
+     //aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
      Text word = text_create(aux);
 
      printf("Dame la definicion: \n");
-     aux = (char*) malloc(500 * sizeof(char));
+     //aux = (char*) malloc(500 * sizeof(char));
      gets(aux);
-     aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
+	 //sscanf("%s", aux);
+     //aux = (char*)realloc(aux, (strlen(aux) + 1) * sizeof(char));
      Text definition = text_create(aux);
      dict_set(d, word, definition);
  }
